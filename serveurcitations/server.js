@@ -341,7 +341,7 @@ app.get('/api/user', (req, res) => {
     },
   ];
   
-  const rest = new REST({ version: '9' }).setToken("");
+  const rest = new REST({ version: '9' }).setToken();
   
   (async () => {
     try {
