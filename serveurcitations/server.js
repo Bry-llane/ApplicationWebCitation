@@ -207,8 +207,8 @@ let jwtToken="a";
 let verifToken;
 
 passport.use(new DiscordStrategy({
-    clientID: '1189555662422814750',
-    clientSecret: 'ZBpSq-q-iXT9HcPRFdd0ri7mPzmyQrCM',
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
     callbackURL: 'http://localhost:8081/auth/discord/callback', // URL de notre serveur
     scope: ['identify'],
   }, (accessToken, refreshToken, profile, done) => {
@@ -341,13 +341,13 @@ app.get('/api/user', (req, res) => {
     },
   ];
   
-  const rest = new REST({ version: '9' }).setToken('MTE4OTU1NTY2MjQyMjgxNDc1MA.G-vOpb.vncLqHyx-qPnAwzs6gw9fTlCSabGN97AjwbEhk');
+  const rest = new REST({ version: '9' }).setToken(process.env.BOT_TOKEN);
   
   (async () => {
     try {
       console.log('Started refreshing application (/) commands.');
   
-      await rest.put(Routes.applicationCommands('1189555662422814750'), {
+      await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), {
         body: commands,
       });
   
@@ -464,7 +464,7 @@ app.get('/api/user', (req, res) => {
     }
 });
   
-  client.login('MTE4OTU1NTY2MjQyMjgxNDc1MA.G-vOpb.vncLqHyx-qPnAwzs6gw9fTlCSabGN97AjwbEhk');
+  client.login(process.env.BOT_TOKEN);
   
   app.listen(8081, ()=>{
       console.log("listening");
